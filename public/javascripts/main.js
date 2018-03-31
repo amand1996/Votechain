@@ -49,6 +49,11 @@ $(document).ready(function () {
 		}, 1000)
 	});
 
+	$('#qr_file').change(function(){
+		alert("uploaded");
+	});
+
+
 	// $("#snapshots").on("click", ".item", select_snapshot);
 
 	function addImageToForm() {

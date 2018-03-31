@@ -6,8 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var index = require('./routes/index');
+var jwt = require('jsonwebtoken');
 
 var app = express();
+app.jwt = jwt;
+app.jwtSecret = 'votechain';
+
+app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
+	path: ['/']
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
