@@ -44,17 +44,10 @@ $(document).ready(function () {
 		$('#camera, #take_snapshots').hide();
 		$('#snapshots').show();
 		$('#register_btn').attr('disabled', false);
-		setTimeout(function(){
+		setTimeout(function () {
 			addImageToForm();
 		}, 1000)
 	});
-
-	$('#qr_file').change(function(){
-		alert("uploaded");
-	});
-
-
-	// $("#snapshots").on("click", ".item", select_snapshot);
 
 	function addImageToForm() {
 		var canvas = $('#snapshots > canvas').get(0);
@@ -243,27 +236,19 @@ $(document).ready(function () {
 											</p>
 										</div>
 									</div>
-								</div>`
-							);
-		});
+								</div>`);
 	});
+});
 
-	function decodeQR() {
-		var filesSelected = document.getElementById("qrimage").files;
-		if (filesSelected.length > 0) {
-			var fileToLoad = filesSelected[0];
-
-			var fileReader = new FileReader();
-
-			fileReader.onload = function (fileLoadedEvent) {
-				QRdata = fileLoadedEvent.target.result;
-				qrcode.decode(QRdata);
-
-				qrcode.callback = function (decodedData) {
-					console.log(decodedData);
-				}
-			};
-
-			fileReader.readAsDataURL(fileToLoad);
-		}
-	}
+var upload_qr = function (event) {
+	$('.lds-spinner').hide();
+	var reader = new FileReader();
+	reader.onload = function () {
+		var output = document.getElementById('qr_img');
+		output.src = reader.result;
+		$('#upload_qr').hide();
+		$('#submit_qr').show();
+		alert("QR Code Uploaded");
+	};
+	reader.readAsDataURL(event.target.files[0]);
+};
