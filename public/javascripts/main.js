@@ -252,3 +252,12 @@ var upload_qr = function (event) {
 	};
 	reader.readAsDataURL(event.target.files[0]);
 };
+
+var submit_qr_func = function (event) {
+	$('#qr_img').hide();
+	$('#txtmsg').html(`Capture your face to verify your identity`);
+	$('#submit_qr').hide();
+	$('#capture_img').show();
+	$('#camera').show();
+	var camera = new JpegCamera("#camera");
+}

@@ -6,9 +6,6 @@
                     Upload QR Code
                     <input type="file" name="qrimage" id="qrimage" onchange="decodeQR();">
                 </div>
-                <div id="camera">
-
-                </div>
                 <button id="take_snapshots" class="btn btn-primary">Capture</button>
                 <div id="snapshots"></div>
             </div> -->
@@ -18,7 +15,7 @@
                         <h1 class="display-4 text-center">Welcome to the Voting Phase</h1>
                         <p class="lead text-center">
 
-                            <small>Please upload your QR Code below</small>
+                            <small id="txtmsg">Please upload your QR Code below</small>
                             <hr>
                             <div class="lds-css ng-scope">
                                 <div class="lds-spinner" style="width: 100%;height:100%; margin: 0 auto">
@@ -35,8 +32,10 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <div style="margin: 0 auto;">
-                                    <img src="" id="qr_img"style="margin: 0 auto; display:block;">
+                                <div class="text-center" style="margin: 0 auto;">
+                                    <img src="" id="qr_img" style="margin: 0 auto; display:block;">
+                                    <div class="text-center" id="camera" style="margin: 0 auto; display:none;"></div>
+                                    <div id="snapshots"></div>
                                     <br>
                                 </div>
                                 <style type="text/css">
@@ -176,9 +175,12 @@
                                 right: 0;
                                 top: 0;" onchange="javascript:upload_qr(event);" accept="image/*"/>Upload My QR Code</div>
 
-                                <div type="button" class="btn btn-primary btn-lg btn-block" id="submit_qr" style="position: relative;
+                                <div type="button" class="btn btn-primary btn-lg btn-block" id="submit_qr" onclick="javascript:submit_qr_func(event);" style="position: relative;
                             overflow: hidden; display:none;">
                                 Submit My QR Code</div>
+                                <div type="button" class="btn btn-danger btn-lg btn-block" id="capture_img" onclick="javascript:capture_img_func(event);" style="position: relative;
+                            overflow: hidden; display:none;">
+                                Capture</div>
                             <!-- <div class="custom-control custom-radio">
                                 <input type="radio" id="rahul" name="candidate" value="Rahul Gandhi" class="custom-control-input">
                                 <label class="custom-control-label" for="rahul">Rahul Gandhi</label>
