@@ -1,0 +1,26 @@
+{
+  "name": "votechain-node",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "ejs": "^2.5.7",
+    "express": "~4.15.2",
+    "mongoose": "^5.0.12",
+    "morgan": "~1.8.1",
+    "multer": "^1.3.0",
+    "qrcode": "^1.2.0",
+    "serve-favicon": "~2.4.2",
+    "solc": "^0.4.21",
+    "web3": "^0.20.1"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.1.0",
+    "nodemon": "^1.17.2"
+  }
+}

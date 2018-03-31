@@ -1,0 +1,41 @@
+<% include header.ejs %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    Upload QR Code
+                    <input type="file" name="qrimage" id="qrimage" onchange="decodeQR();">
+                </div>
+                <div id="camera">
+
+                </div>
+                <button id="take_snapshots" class="btn btn-primary">Capture</button>
+                <div id="snapshots"></div>
+            </div>
+            <div class="col-md-6">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Vote your leader</h1>
+                        <p class="lead">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="rahul" name="candidate" value="Rahul Gandhi" class="custom-control-input">
+                                <label class="custom-control-label" for="rahul">Rahul Gandhi</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="modi" name="candidate" value="Narendra Modi" class="custom-control-input">
+                                <label class="custom-control-label" for="modi">Narendra Modi</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="arvind" name="candidate" value="Arvind Kejrival" class="custom-control-input">
+                                <label class="custom-control-label" for="arvind">Arvind Kejrival</label>
+                            </div>
+                        </p>
+                        <button class="btn btn-primary" id="vote_btn" onclick="voteForCandidate()">Vote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+    </html>

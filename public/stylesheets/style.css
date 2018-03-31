@@ -1,0 +1,19 @@
+body {
+  background-color: honeydew;
+}
+
+#camera {
+  display: inline-block;
+  background-color: #eee;
+  width: 200px;
+  height: 250px;
+  margin: 5em;
+}
+
+#snapshots{
+  display: none;
+  width: 200px;
+  height: 250px;
+  margin: 5em;
+  border: solid;
+}
