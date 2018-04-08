@@ -1,6 +1,5 @@
 var keyConfig = require('./../config');
 var request = require('request');
-var axios = require("axios").default;
 
 var dataURItoBuffer = function (dataURL, callback) {
 	var buff = new Buffer(dataURL.replace(/^data:image\/(png|gif|jpeg);base64,/, ''), 'base64');
