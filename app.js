@@ -65,7 +65,7 @@ models(app, mongoose);
 
 /**************************************MongoDB Database***************************************/
 app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
-  path: ['/']
+  path: ['/404']
 }));
 
 var debug = require('debug')('votechain-node:server');
