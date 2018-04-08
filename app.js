@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var index = require('./routes/index');
 var jwt = require('jsonwebtoken');
+var keyConfig = require('./config');
 
 var app = express();
 app.jwt = jwt;
@@ -51,7 +52,7 @@ app.use(function (err, req, res, next) {
 });
 
 /**************************************MongoDB Database***************************************/
-var mongoURI = 'mongodb://votechain:votechain@ds127589.mlab.com:27589/votechain';
+var mongoURI = keyConfig.mongoURI;
 
 app.db = mongoose.createConnection(mongoURI);
 
