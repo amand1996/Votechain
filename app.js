@@ -13,7 +13,7 @@ app.jwt = jwt;
 app.jwtSecret = 'votechain';
 
 app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
-	path: ['/']
+  path: ['/']
 }));
 
 // view engine setup
@@ -61,32 +61,11 @@ app.db.once('open', function () {
   console.log("Connected to ", mongoURI);
 });
 
-var voterSchema = mongoose.Schema({
-  name: String,
-  aadhaar: String,
-  image: String,
-  hasVoted: Boolean,
-  isValid: Boolean,
-  constituency: String,
-  created: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-var adminSchema = mongoose.Schema({
-  login_id: String,
-  password: String,
-  created: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-var Voter = app.db.model('Voter', voterSchema);
-var Admin = app.db.model('Admin', adminSchema);
+import { models } from './model';
+models(app, mongoose);
 
 /**************************************MongoDB Database***************************************/
+
 var debug = require('debug')('votechain-node:server');
 var http = require('http');
 
@@ -140,9 +119,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ?
+    'Pipe ' + port :
+    'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -165,9 +144,9 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('Listening on ' + bind);
 }
