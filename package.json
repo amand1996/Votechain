@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --debug app.js"
+    "start": "nodemon --debug index.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -25,6 +25,8 @@
     "web3": "^0.20.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "ganache-cli": "^6.1.0",
     "nodemon": "^1.17.2"
   }
