@@ -64,7 +64,7 @@ app.db.once('open', function () {
 var voterSchema = mongoose.Schema({
   name: String,
   aadhaar: String,
-  image: Buffer,
+  image: String,
   hasVoted: Boolean,
   isValid: Boolean,
   constituency: String,

@@ -35,137 +35,9 @@
                                 <div class="text-center" style="margin: 0 auto;">
                                     <img src="" id="qr_img" style="margin: 0 auto; display:block;">
                                     <div class="text-center" id="camera" style="margin: 0 auto; display:none;"></div>
-                                    <div id="snapshots"></div>
+                                    <div class="text-center" style="margin: 0 auto;" id="snapshots"></div>
                                     <br>
                                 </div>
-                                <style type="text/css">
-                                    @keyframes lds-spinner {
-                                        0% {
-                                            opacity: 1;
-                                        }
-                                        100% {
-                                            opacity: 0;
-                                        }
-                                    }
-
-                                    @-webkit-keyframes lds-spinner {
-                                        0% {
-                                            opacity: 1;
-                                        }
-                                        100% {
-                                            opacity: 0;
-                                        }
-                                    }
-
-                                    .lds-spinner {
-                                        position: relative;
-                                    }
-
-                                    .lds-spinner div {
-                                        left: 94px;
-                                        top: 48px;
-                                        position: absolute;
-                                        -webkit-animation: lds-spinner linear 1s infinite;
-                                        animation: lds-spinner linear 1s infinite;
-                                        background: #93dbe9;
-                                        width: 12px;
-                                        height: 24px;
-                                        border-radius: 40%;
-                                        -webkit-transform-origin: 6px 52px;
-                                        transform-origin: 6px 52px;
-                                    }
-
-                                    .lds-spinner div:nth-child(1) {
-                                        -webkit-transform: rotate(0deg);
-                                        transform: rotate(0deg);
-                                        -webkit-animation-delay: -0.916666666666667s;
-                                        animation-delay: -0.916666666666667s;
-                                    }
-
-                                    .lds-spinner div:nth-child(2) {
-                                        -webkit-transform: rotate(30deg);
-                                        transform: rotate(30deg);
-                                        -webkit-animation-delay: -0.833333333333333s;
-                                        animation-delay: -0.833333333333333s;
-                                    }
-
-                                    .lds-spinner div:nth-child(3) {
-                                        -webkit-transform: rotate(60deg);
-                                        transform: rotate(60deg);
-                                        -webkit-animation-delay: -0.75s;
-                                        animation-delay: -0.75s;
-                                    }
-
-                                    .lds-spinner div:nth-child(4) {
-                                        -webkit-transform: rotate(90deg);
-                                        transform: rotate(90deg);
-                                        -webkit-animation-delay: -0.666666666666667s;
-                                        animation-delay: -0.666666666666667s;
-                                    }
-
-                                    .lds-spinner div:nth-child(5) {
-                                        -webkit-transform: rotate(120deg);
-                                        transform: rotate(120deg);
-                                        -webkit-animation-delay: -0.583333333333333s;
-                                        animation-delay: -0.583333333333333s;
-                                    }
-
-                                    .lds-spinner div:nth-child(6) {
-                                        -webkit-transform: rotate(150deg);
-                                        transform: rotate(150deg);
-                                        -webkit-animation-delay: -0.5s;
-                                        animation-delay: -0.5s;
-                                    }
-
-                                    .lds-spinner div:nth-child(7) {
-                                        -webkit-transform: rotate(180deg);
-                                        transform: rotate(180deg);
-                                        -webkit-animation-delay: -0.416666666666667s;
-                                        animation-delay: -0.416666666666667s;
-                                    }
-
-                                    .lds-spinner div:nth-child(8) {
-                                        -webkit-transform: rotate(210deg);
-                                        transform: rotate(210deg);
-                                        -webkit-animation-delay: -0.333333333333333s;
-                                        animation-delay: -0.333333333333333s;
-                                    }
-
-                                    .lds-spinner div:nth-child(9) {
-                                        -webkit-transform: rotate(240deg);
-                                        transform: rotate(240deg);
-                                        -webkit-animation-delay: -0.25s;
-                                        animation-delay: -0.25s;
-                                    }
-
-                                    .lds-spinner div:nth-child(10) {
-                                        -webkit-transform: rotate(270deg);
-                                        transform: rotate(270deg);
-                                        -webkit-animation-delay: -0.166666666666667s;
-                                        animation-delay: -0.166666666666667s;
-                                    }
-
-                                    .lds-spinner div:nth-child(11) {
-                                        -webkit-transform: rotate(300deg);
-                                        transform: rotate(300deg);
-                                        -webkit-animation-delay: -0.083333333333333s;
-                                        animation-delay: -0.083333333333333s;
-                                    }
-
-                                    .lds-spinner div:nth-child(12) {
-                                        -webkit-transform: rotate(330deg);
-                                        transform: rotate(330deg);
-                                        -webkit-animation-delay: 0s;
-                                        animation-delay: 0s;
-                                    }
-
-                                    .lds-spinner {
-                                        width: 200px !important;
-                                        height: 200px !important;
-                                        -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
-                                        transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
-                                    }
-                                </style>
                             </div>
                             <div type="button" class="file btn btn-success btn-lg btn-block" id="upload_qr" style="position: relative;
                             overflow: hidden;">
@@ -173,14 +45,29 @@
                                 font-size: 50px;
                                 opacity: 0;
                                 right: 0;
-                                top: 0;" onchange="javascript:upload_qr(event);" accept="image/*"/>Upload My QR Code</div>
+                                top: 0;" onchange="javascript:upload_qr(event);" accept="image/*" />Upload My QR Code</div>
+
+                            <form method="post" action="/verifyvoter" enctype="multipart/form-data">
+                                <div style="display:none;">
+                                    <input type="hidden" class="form-control" id="qrdata" name="qrdata" filename="name1">
+                                    <input type="hidden" class="form-control" id="avatar" name="avatar" filename="name">
+                                </div>
 
                                 <div type="button" class="btn btn-primary btn-lg btn-block" id="submit_qr" onclick="javascript:submit_qr_func(event);" style="position: relative;
                             overflow: hidden; display:none;">
-                                Submit My QR Code</div>
-                                <div type="button" class="btn btn-danger btn-lg btn-block" id="capture_img" onclick="javascript:capture_img_func(event);" style="position: relative;
+                                    Submit My QR Code</div>
+
+                                <div type="button" class="btn btn-danger btn-lg btn-block" id="capture_img" onclick="javascript:capture_img_func(event);"
+                                    style="position: relative;
                             overflow: hidden; display:none;">
-                                Capture</div>
+                                    Capture</div>
+
+                                <div type="button" class="btn btn-success btn-lg btn-block" id="verify_btn" onclick="javascript:document.forms[0].submit();"
+                                    style="position: relative;
+                            overflow: hidden; display:none;">
+                                    Submit</div>
+                            </form>
+
                             <!-- <div class="custom-control custom-radio">
                                 <input type="radio" id="rahul" name="candidate" value="Rahul Gandhi" class="custom-control-input">
                                 <label class="custom-control-label" for="rahul">Rahul Gandhi</label>
