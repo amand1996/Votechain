@@ -6,7 +6,9 @@ var keyConfig = require('./../config');
 router.get('/', function (req, res, next) {
 	console.log(req.JWTData);
 	if (req.JWTData.userType == 'admin') {
-		res.render('admin');
+		res.render('admin', {
+			JWTData: req.JWTData
+		});
 	} else {
 		res.redirect('/login');
 	}
@@ -16,8 +18,15 @@ router.get('/login', function (req, res, next) {
 	if (req.JWTData.userType == 'admin') {
 		res.redirect('/admin');
 	} else {
-		res.render('login');
+		res.render('login', {
+			JWTData: req.JWTData
+		});
 	}
+});
+
+router.get('/logout', function (req, res, next) {
+	res.clearCookie('token');
+	res.redirect('/');
 });
 
 router.post('/login', function (req, res, next) {
@@ -30,11 +39,13 @@ router.post('/login', function (req, res, next) {
 		}
 		if (data.password == req.body.password) {
 			var payload = {
-				userType: 'admin'
+				userType: 'admin',
+				firstName: 'Admin'
 			};
 			var token = req.app.jwt.sign(payload, req.app.jwtSecret);
 			// add token to cookie
 			res.cookie('token', token);
+			
 			res.redirect('/admin');
 		} else {
 			res.redirect('/login');

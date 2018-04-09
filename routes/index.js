@@ -12,23 +12,33 @@ var upload = multer({
 });
 
 router.get('/', function (req, res, next) {
-	res.render('index');
+	res.render('index', {
+		JWTData: req.JWTData
+	});
 });
 
 router.get('/temp', function (req, res, next) {
-	res.render('votecandidate');
+	res.render('votecandidate', {
+		JWTData: req.JWTData
+	});
 });
 
 router.get('/vote', function (req, res, next) {
-	res.render('vote');
+	res.render('vote', {
+		JWTData: req.JWTData
+	});
 });
 
 router.get('/register', function (req, res, next) {
-	res.render('register');
+	res.render('register', {
+		JWTData: req.JWTData
+	});
 });
 
 router.get('/results', function (req, res, next) {
-	res.render('results');
+	res.render('results', {
+		JWTData: req.JWTData
+	});
 });
 
 router.get('/test', function (req, res, next) {

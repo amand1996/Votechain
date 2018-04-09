@@ -38,6 +38,11 @@
                 <li class="nav-item" id="admin">
                     <a class="nav-link" href="/admin">Admin Panel</a>
                 </li>
+                <% if(JWTData.userType == 'admin') { %> 
+                    <li class="nav-item" id="logout">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </nav>
