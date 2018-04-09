@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 			JWTData: req.JWTData
 		});
 	} else {
-		res.redirect('/login');
+		res.redirect('/admin/login');
 	}
 });
 

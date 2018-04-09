@@ -11,6 +11,11 @@ var jwt = require('jsonwebtoken');
 var keyConfig = require('./config');
 
 var app = express();
+
+app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
+  path: ['/404']
+}));
+
 app.jwt = jwt;
 app.jwtSecret = 'votechain';
 
@@ -46,7 +51,9 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+		JWTData: req.JWTData
+	});
 });
 
 /**************************************MongoDB Database***************************************/
@@ -64,9 +71,7 @@ import { models } from './model';
 models(app, mongoose);
 
 /**************************************MongoDB Database***************************************/
-app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
-  path: ['/404']
-}));
+
 
 var debug = require('debug')('votechain-node:server');
 var http = require('http');
