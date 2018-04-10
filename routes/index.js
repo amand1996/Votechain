@@ -139,7 +139,10 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 				}
 				// if (data.hasVoted == true || data.isValid == false) {
 				if (false) {
-					return res.send('You are not allowed to Vote.');
+					return res.render('message', {
+						message: 'Sorry! You are not allowed to vote.',
+						JWTData: req.JWTData
+					});
 				} else {
 					console.log('Entered here');
 					console.log(data.image);
@@ -147,6 +150,13 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 					helper.sendImageToMicrosoftDetectEndPoint(data.image, function (responseA) {
 						console.log(responseA);
 						responseA = JSON.parse(responseA);
+						if (responseA.length == 0) {
+							return res.render('message', {
+								message: 'Face verification failed. Try again',
+								JWTData: req.JWTData
+							});
+						}
+
 						console.log(responseA[0].faceId);
 
 						face1 = responseA[0].faceId;
@@ -154,6 +164,12 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 						helper.sendImageToMicrosoftDetectEndPoint(avatar_uri, function (responseB) {
 							console.log(responseB);
 							responseB = JSON.parse(responseB);
+							if (responseB.length == 0) {
+								return res.render('message', {
+									message: 'Face verification failed. Try again',
+									JWTData: req.JWTData
+								});
+							}
 							face2 = responseB[0].faceId;
 
 							var payload = JSON.stringify({
@@ -178,7 +194,10 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 
 									return res.redirect(voteUrl);
 								} else {
-									res.send('Sorry!');
+									return res.render('message', {
+										message: 'Face verification failed. Try again',
+										JWTData: req.JWTData
+									});
 								}
 							});
 						});
