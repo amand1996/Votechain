@@ -17,9 +17,32 @@ router.get('/', function (req, res, next) {
 	});
 });
 
-router.get('/temp', function (req, res, next) {
-	res.render('votecandidate', {
-		JWTData: req.JWTData
+router.get('/votecandidate', function (req, res, next) {
+
+	if (!req.cookies.votePayload) {
+		return res.redirect('/vote');
+	}
+
+	var id = req.cookies.votePayload.id;
+	var constituency = req.cookies.votePayload.constituency;
+	var name = req.cookies.votePayload.name;
+	var aadhaar = req.cookies.votePayload.aadhaar;
+
+	res.clearCookie('votePayload');
+
+	req.app.db.models.Candidate.find({}, function (err, data) {
+		if (err) {
+			console.log(err);
+			return res.send(err);
+		}
+		res.render('votecandidate', {
+			JWTData: req.JWTData,
+			data: data,
+			id: id,
+			constituency: constituency,
+			name: name,
+			aadhaar: aadhaar
+		});
 	});
 });
 
@@ -90,6 +113,7 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 	var avatar_uri = req.body.avatar;
 	var qr = new QrCode();
 	var face1, face2;
+	var id;
 
 	var buffer = new Buffer(qr_uri.split(",")[1], 'base64');
 
@@ -107,7 +131,7 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 				// TODO handle error
 			}
 
-			var id = value.result.substr(1).slice(0, -1);
+			id = value.result.substr(1).slice(0, -1);
 
 			req.app.db.models.Voter.findById(id, function (err, data) {
 				if (err) {
@@ -139,7 +163,23 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 
 							helper.sendImageToMicrosoftVerifyEndPoint(payload, function (response) {
 								console.log(response);
-								return res.send(response);
+								response = JSON.parse(response);
+								if (response.isIdentical == true) {
+									var voteUrl = '/votecandidate';
+
+									var votePayload = {
+										id: id,
+										constituency: data.constituency,
+										name: data.name,
+										aadhaar: data.aadhaar
+									}
+
+									res.cookie('votePayload', votePayload);
+
+									return res.redirect(voteUrl);
+								} else {
+									res.send('Sorry!');
+								}
 							});
 						});
 					});

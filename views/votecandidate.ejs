@@ -3,30 +3,40 @@
         <div class="row">
             <div class="col-md-6">
                 <h1> Vote your candidate</h1>
+                <hr>
+                <strong>NAME:
+                </strong>
+                <p>
+                    <%= name %>
+                </p>
+                <strong>AADHAAR:
+                </strong>
+                <p>
+                    <%= aadhaar %>
+                </p>
+                <strong>CONSTITUENCY:
+                </strong>
+                <p>
+                    <%= constituency %>
+                </p>
             </div>
             <div class="col-md-6">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <h1 class="display-4">Register</h1>
                         <p class="lead">
-                            <form method="post" action="/register">
-
+                            <% for(var i=0; i< data.length; i++) { %>
                                 <div class="custom-control custom-radio">
-                                <input type="radio" id="rahul" name="candidate" value="Rahul Gandhi" class="custom-control-input">
-                                <label class="custom-control-label" for="rahul">Rahul Gandhi</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="modi" name="candidate" value="Narendra Modi" class="custom-control-input">
-                                <label class="custom-control-label" for="modi">Narendra Modi</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" id="arvind" name="candidate" value="Arvind Kejrival" class="custom-control-input">
-                                <label class="custom-control-label" for="arvind">Arvind Kejrival</label>
-                            </div>
-                                <div class="form-group">
-                                    <button type="submit" id="register_btn" class="btn btn-primary" disabled>Submit</button>
+                                    <input type="radio" id="<%=data[i].name.split(' ')[0] %>" name="candidate" value="<%=data[i].name %>" class="custom-control-input">
+                                    <label class="custom-control-label" for="<%=data[i].name.split(' ')[0] %>">
+                                        <%=data[i].name %>
+                                    </label>
                                 </div>
-                            </form>
+                                <% } %>
+
+                                    <div class="form-group">
+                                        <button type="submit" id="register_btn" class="btn btn-primary" disabled>Submit</button>
+                                    </div>
                         </p>
                     </div>
                 </div>
