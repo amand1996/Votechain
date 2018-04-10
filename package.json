@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --debug index.js"
+    "start": "nodemon --inspect index.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
