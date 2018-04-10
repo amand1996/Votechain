@@ -1,0 +1,79 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2018-04-10T21:39:42.219Z",
+    "end": "2018-04-10T21:39:42.370Z",
+    "duration": 151,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "9d8f0fc5-b7d6-4c76-9c94-2f23d80da547",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "b83f9ac3-4916-49c7-a40b-3d309fcfbf8a",
+        "title": "Test1",
+        "fullFile": "/home/aman/Desktop/votechain-node/tests/index.js",
+        "file": "/tests/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [
+          {
+            "title": "GET /",
+            "fullTitle": "Test1 GET /",
+            "timedOut": false,
+            "duration": 104,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "_chai2.default.request(server).get('/').end(function (err, res) {\n\tres.should.have.status(200);\n\tdone();\n});",
+            "err": {},
+            "isRoot": false,
+            "uuid": "172a3597-ec24-4b91-ae68-91764672c929",
+            "isHook": false,
+            "skipped": false
+          }
+        ],
+        "suites": [],
+        "passes": [
+          "172a3597-ec24-4b91-ae68-91764672c929"
+        ],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 104,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 30000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 30000
+  },
+  "copyrightYear": 2018
+}
