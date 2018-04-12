@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js --inspect index.js",
-    "test": "./node_modules/mocha/bin/mocha tests/index.js --require babel-register --reporter mochawesome --timeout 30000 || exit 0"
+    "test": "./node_modules/mocha/bin/mocha tests/index.js --require babel-register --reporter mochawesome --timeout 30000 || exit 0",
+    "testrpc": "node_modules/ethereumjs-testrpc/build/cli.node.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -31,8 +32,10 @@
     "web3": "^0.20.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "nodemon": "^1.17.2"
   }
 }
