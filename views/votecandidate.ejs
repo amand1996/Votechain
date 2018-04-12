@@ -25,18 +25,19 @@
                     <div class="container">
                         <h1 class="display-4">Cast your Vote</h1>
                         <p class="lead">
-                            <% for(var i=0; i< data.length; i++) { %>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="<%=data[i].name.split(' ')[0] %>" name="candidate" value="<%=data[i].name %>" class="custom-control-input">
-                                    <label class="custom-control-label" for="<%=data[i].name.split(' ')[0] %>">
-                                        <%=data[i].name %>
-                                    </label>
-                                </div>
-                                <% } %>
-
-                                    <div class="form-group">
-                                        <button type="submit" id="register_btn" class="btn btn-primary" disabled>Submit</button>
-                                    </div>
+                                    <% for(var i=0; i< data.length; i++) { %>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="<%=data[i].name.split(' ')[0] %>" name="votecandidate" value="<%=data[i].name.split(' ')[0] %>" class="custom-control-input">
+                                            <label class="custom-control-label" for="<%=data[i].name.split(' ')[0] %>">
+                                                <%=data[i].name %>
+                                            </label>
+                                        </div>
+                                        <% } %>
+        
+                                            <div class="form-group">
+                                                <button id="vote_btn" class="btn btn-primary" onclick="javascript:voteForCandidate();">Submit</button>
+                                            </div>
+                            
                         </p>
                     </div>
                 </div>

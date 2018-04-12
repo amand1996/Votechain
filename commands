@@ -1,2 +1,1 @@
-$ npm install -g ganache-cli
-$ npm install -g nodemon
+$ node_modules/ethereumjs-testrpc/build/cli.node.js

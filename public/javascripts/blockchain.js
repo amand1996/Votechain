@@ -88,20 +88,20 @@ candidates = {
 }
 
 function voteForCandidate() {
-  candidateName = $("#candidate").val();
+  candidateName = $("input[name=votecandidate]").val();
+  
   contractInstance.voteForCandidate(candidateName, {
     from: web3.eth.accounts[0]
   }, function () {
-    let div_id = candidates[candidateName];
-    $("#" + div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+    alert(candidateName+' : '+contractInstance.totalVotesFor.call(candidateName).toString());
   });
 }
 
-$(document).ready(function () {
-  candidateNames = Object.keys(candidates);
-  for (var i = 0; i < candidateNames.length; i++) {
-    let name = candidateNames[i];
-    let val = contractInstance.totalVotesFor.call(name).toString()
-    $("#" + candidates[name]).html(val);
-  }
-});
+// $(document).ready(function () {
+//   candidateNames = Object.keys(candidates);
+//   for (var i = 0; i < candidateNames.length; i++) {
+//     let name = candidateNames[i];
+//     let val = contractInstance.totalVotesFor.call(name).toString()
+//     $("#" + candidates[name]).html(val);
+//   }
+// });
