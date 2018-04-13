@@ -4,7 +4,7 @@ abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"bytes3
 
 VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute deployedContract.address to get the address at which the contract is deployed and change the line below to use your deployed address
-contractInstance = VotingContract.at('0x233f193d35885aa0c5ae117e90d96ceedb025a34');
+contractInstance = VotingContract.at('0xfe153182585ac04bab1898e11f12d584f3752b8f');
 
 candidates = {
   "Rahul": "candidate-1",
@@ -30,6 +30,19 @@ function voteForCandidate(id) {
     });
   }
 }
+
+
+var electionResults = (function getElectionResults() {
+  var voteResults = {};
+  candidateNames = Object.keys(candidates);
+
+  for (var i = 0; i < candidateNames.length; i++) {
+    var name = candidateNames[i];
+    var val = contractInstance.totalVotesFor.call(name).toLocaleString();
+    voteResults[name] = val;
+  }
+  return voteResults;
+})();
 
 
 // $(document).ready(function () {

@@ -19,7 +19,6 @@ module.exports.makeAuthHappen = function (options) {
             res.cookie('token', token);
 
             req.JWTData = payload;
-            console.log(req.JWTData);
 
             next();
             return;
@@ -28,9 +27,7 @@ module.exports.makeAuthHappen = function (options) {
         // if cookie exists, decode and store
         var decoded = req.app.jwt.decode(req.cookies.token);
         req.JWTData = decoded;
-        console.log(req.JWTData);
 
-        console.log('############ DECODED####');
         next();
     };
 
