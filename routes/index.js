@@ -30,10 +30,12 @@ router.get('/votecandidate', function (req, res, next) {
 
 	res.clearCookie('votePayload');
 
-	req.app.db.models.Candidate.find({}, function (err, data) {
+	req.app.db.models.Candidate.find({
+		constituency: constituency
+	}, function (err, data) {
 		if (err) {
 			console.log(err);
-			return res.send(err);
+			return next(err);
 		}
 		res.render('votecandidate', {
 			JWTData: req.JWTData,
@@ -87,7 +89,7 @@ router.post('/register', upload.single('avatar'), function (req, res, next) {
 	req.app.db.models.Voter.create(voterDetails, function (err, data) {
 		if (err) {
 			console.log(err);
-			return res.send(err);
+			return next(err);
 		}
 
 		var voterID = JSON.stringify(data._id);
@@ -137,8 +139,8 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 				if (err) {
 					console.log(err);
 				}
-				// if (data.hasVoted == true || data.isValid == false) {
-				if (false) {
+				if (data.hasVoted == true || data.isValid == false) {
+				// if (false) {
 					return res.render('message', {
 						message: 'Sorry! You are not allowed to vote.',
 						JWTData: req.JWTData
@@ -206,6 +208,20 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 			});
 		};
 		qr.decode(image.bitmap);
+	});
+});
+
+router.get('/voteadded/:id', function (req, res, next) {
+	req.app.db.models.Voter.findById(req.params.id, function (err, data) {
+		if (err) {
+			console.log(err);
+			return next(err);
+		}
+		data.hasVoted = true;
+
+		data.save();
+
+		return res.redirect('/');
 	});
 });
 

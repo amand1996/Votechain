@@ -12,10 +12,6 @@ var keyConfig = require('./config');
 
 var app = express();
 
-app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
-  path: ['/404']
-}));
-
 app.jwt = jwt;
 app.jwtSecret = 'votechain';
 
@@ -31,6 +27,9 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+app.use(require(__dirname + '/middleware.js').makeAuthHappen().unless({
+  path: ['/404']
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);

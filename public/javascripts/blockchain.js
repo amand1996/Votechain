@@ -9,20 +9,28 @@ contractInstance = VotingContract.at('0x233f193d35885aa0c5ae117e90d96ceedb025a34
 candidates = {
   "Rahul": "candidate-1",
   "Arvind": "candidate-2",
-  "Narendra": "candidate-3"
+  "Narendra": "candidate-3",
+  "Rajnath": "candidate-4",
+  "Piyush": "candidate-5",
+  "Smriti": "candidate-6"
 }
 
-function voteForCandidate() {
-  candidateName = $("input[name=votecandidate]").val();
+function voteForCandidate(id) {
+  var candidateName = $("input[name=votecandidate]").val();
   // var candidateName = 'Narendra'
 
-  contractInstance.voteForCandidate(candidateName, {
-    from: web3.eth.accounts[0]
-  }, function () {
-    // console.log(contractInstance.totalVotesFor.call(candidateName).toString());
-    alert(candidateName + ' : ' + contractInstance.totalVotesFor.call(candidateName).toString());
-  });
+  var voteflag = confirm("Confirm Vote");
+
+  if (voteflag == true) {
+    contractInstance.voteForCandidate(candidateName, {
+      from: web3.eth.accounts[0]
+    }, function () {
+      console.log(contractInstance.totalVotesFor.call(candidateName).toString());
+      window.location = "/voteadded/" + id;
+    });
+  }
 }
+
 
 // $(document).ready(function () {
 //   candidateNames = Object.keys(candidates);

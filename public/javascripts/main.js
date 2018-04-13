@@ -12,6 +12,21 @@ $(document).ready(function () {
 		$('#admin').addClass('active');
 	}
 
+	var table_view_btn_flag = true;
+
+	$('#table_view_btn').click(function () {
+		if (table_view_btn_flag == true) {
+			$('#voter_table').hide();
+			$('#candidate_table').show();
+			table_view_btn_flag = false
+		} else {
+			$('#voter_table').show();
+			$('#candidate_table').hide();
+			table_view_btn_flag = true
+		}
+
+	});
+
 	camera = new JpegCamera("#camera");
 
 	$("#take_snapshots").click(function () {

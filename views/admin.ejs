@@ -1,18 +1,80 @@
 <% include header.ejs %>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
+                <hr>
+                <button type="button" class="btn btn-warning" id="table_view_btn"> Voters / Candidates</button>
                 
-            </div>
-            <div class="col-md-6">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Admin Panel</h1>
-                        <p class="lead">
-
-                        </p>
-                    </div>
+                <hr>
+                <div id="voter_table">
+                    <table class="table table-hover table-bordered table-striped">
+                        <h4>Voters</h4>
+                        <small>Click on the row item to verify the identity of Voter.</small>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Aadhaar</th>
+                                <th scope="col">Constituency</th>
+                                <th scope="col">Voted?</th>
+                                <th scope="col">Verfied?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0 ; i < voters.length; i++) { %>
+                                <tr onclick="window.location='/admin/verifyvoter/<%= voters[i]._id%>';" style="cursor: pointer;">
+                                    <th scope="row">
+                                        <%= i+1 %>
+                                    </th>
+                                    <td>
+                                        <%= voters[i].name%>
+                                    </td>
+                                    <td>
+                                        <%= voters[i].aadhaar.toString().toUpperCase()%>
+                                    </td>
+                                    <td>
+                                        <%= voters[i].constituency%>
+                                    </td>
+                                    <td>
+                                        <%= voters[i].hasVoted.toString().toUpperCase()%>
+                                    </td>
+                                    <td>
+                                        <%= voters[i].isValid.toString().toUpperCase()%>
+                                    </td>
+                                </tr>
+                                <% }%>
+                        </tbody>
+                    </table>
                 </div>
+
+                <div id="candidate_table" style="display:none;">
+                    <table class="table table-hover table-bordered table-striped">
+                        <h4>Candidates</h4>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Constituency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0 ; i < candidates.length; i++) { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= i+1 %>
+                                    </th>
+                                    <td>
+                                        <%= candidates[i].name%>
+                                    </td>
+                                    <td>
+                                        <%= candidates[i].constituency%>
+                                    </td>
+                                </tr>
+                                <% }%>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
