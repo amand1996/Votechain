@@ -1,13 +1,10 @@
 <% include header.ejs %>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Admin Login</h1>
+                    <div class="container" style="width: 40%;">
+                        <h1 class="display-4 text-center">Admin Login</h1>
                         <p class="lead">
                             <form method="post" action="/admin/login">
                                 <div class="form-group">
@@ -18,9 +15,9 @@
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password">
                                 </div>
-                                </div>
+                                <hr>
                                 <div class="form-group">
-                                    <button type="submit" id="login_btn" class="btn btn-primary">Login</button>
+                                    <button type="submit" id="login_btn" class="btn btn-success btn-lg btn-block">Login</button>
                                 </div>
                             </form>
                         </p>
