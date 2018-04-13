@@ -5,9 +5,9 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 
-export const test1 = (server) => {
+export const test = (server) => {
 
-	describe('Test1', function () {
+	describe('Test', function () {
 
 		it('GET /', function (done) {
 			chai.request(server)

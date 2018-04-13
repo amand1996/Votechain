@@ -1,7 +1,7 @@
 const server = require('../app.js');
 
 import {
-    test1
-} from './test1';
+    test
+} from './test';
 
-test1(server);
+test(server);
