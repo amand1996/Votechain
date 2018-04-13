@@ -103,4 +103,19 @@ router.get('/fetchvoters', function (req, res, next) {
 	});
 });
 
+router.post('/addcandidate', function (req, res, next) {
+	var candidate ={
+		name: req.body.cand_name,
+		constituency: req.body.cand_constituency
+	}
+
+	req.app.db.models.Candidate.create(candidate, function (err, data) {
+		if (err) {
+			console.log(err);
+			return next(err);
+		}
+		return res.redirect('/admin');
+	});
+});
+
 module.exports = router;
