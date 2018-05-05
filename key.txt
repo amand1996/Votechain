@@ -1,7 +1,0 @@
-30,000 transactions, 20 per minute.
-
-Endpoint: https://westcentralus.api.cognitive.microsoft.com/face/v1.0
-
-Key 1: e5716d43c5df4057a369b8cbaa4cf319
-
-Key 2: 713673275c69446abb8ff3e1d87c3f26
