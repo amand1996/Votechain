@@ -27,10 +27,17 @@ $(document).ready(function () {
 
 	});
 
-	camera = new JpegCamera("#camera");
+    navigator.mediaDevices.getUserMedia({video: true})
+        .then(mediaStream => {
+            document.querySelector('video').srcObject = mediaStream;
+
+            const track = mediaStream.getVideoTracks()[0];
+            imageCapture = new ImageCapture(track);
+        })
+        .catch(error => console.log(error));
 
 	$("#take_snapshots").click(function () {
-		take_snapshots(1);
+        take_snapshots();
 		$('#camera, #take_snapshots').hide();
 		$('#snapshots').show();
 		$('#register_btn').attr('disabled', false);
@@ -81,11 +88,10 @@ var submit_qr_func = function (event) {
 	$('#submit_qr').hide();
 	$('#capture_img').show();
 	$('#camera').show();
-	camera = new JpegCamera("#camera");
 }
 
 var capture_img_func = function (event) {
-	take_snapshots(1);
+	take_snapshots();
 	$('#camera, #capture_img').hide();
 	$('#snapshots, #verify_btn').show();
 	setTimeout(function () {
@@ -94,9 +100,24 @@ var capture_img_func = function (event) {
 };
 
 var take_snapshots = function (count) {
-	var snapshot = camera.capture();
-	snapshot.get_canvas(add_snapshot);
+    imageCapture.grabFrame()
+        .then(imageBitmap => {
+            const canvas = document.querySelector('#snapshots');
+            drawCanvas(canvas, imageBitmap);
+        })
+        .catch(error => console.log(error));
 };
+
+function drawCanvas(canvas, img) {
+    canvas.width = getComputedStyle(canvas).width.split('px')[0];
+    canvas.height = getComputedStyle(canvas).height.split('px')[0];
+    let ratio  = Math.min(canvas.width / img.width, canvas.height / img.height);
+    let x = (canvas.width - img.width * ratio) / 2;
+    let y = (canvas.height - img.height * ratio) / 2;
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height,
+        x, y, img.width * ratio, img.height * ratio);
+}
 
 var select_snapshot = function () {
 	$(".item").removeClass("selected");
@@ -119,7 +140,7 @@ var add_snapshot = function (element) {
 };
 
 function addImageToForm() {
-	var canvas = $('#snapshots > canvas').get(0);
+	var canvas = $('#snapshots').get(0);
 	var imageData = canvas.toDataURL();
 	document.getElementsByName("avatar")[0].setAttribute("value", imageData);
 	document.getElementsByName("qrdata")[0].setAttribute("value", QR_Data);
